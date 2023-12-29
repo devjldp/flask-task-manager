@@ -103,6 +103,11 @@ def logout():
     return redirect(url_for('login'))
 
 
+@app.route("/add_task")
+def add_task():
+    return render_template("add_task.html")
+
+
 # Si se ejecuta este archivo como script principal
 if __name__ == "__main__":
     # Ejecuta la aplicación Flask con la configuración de las variables de entorno
