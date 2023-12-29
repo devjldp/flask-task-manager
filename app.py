@@ -3,6 +3,8 @@ from flask import (Flask, flash, render_template,
                    redirect, request, session, url_for)
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
+from werkzeug.security import generate_password_hash, check_password_hash
+
 
 # Verifica si el archivo "env.py" existe y, de ser así, importa sus variables de entorno
 if os.path.exists("env.py"):
@@ -25,6 +27,12 @@ mongo = PyMongo(app)
 def get_tasks():
     tasks = mongo.db.tasks.find()
     return render_template("tasks.html", tasks=tasks)
+
+
+@app.route("/register", methods=["GET", "POST"])
+def register():
+    return render_template("register.html"
+                           )
 
 
 # Si se ejecuta este archivo como script principal
