@@ -123,6 +123,15 @@ def add_task():
     return render_template("add_task.html", categories=categories)
 
 
+@app.route("/edit_task/<task_id>")
+def edit_task(task_id):
+    # Obtener la task de la base de datos:
+    task = mongo.db.tasks.find_one({"_id": ObjectId(task_id)})
+
+    categories = mongo.db.categories.find().sort("category_name", 1)
+    return render_template("edit_task.html", task=task, categories=categories)
+
+
 # Si se ejecuta este archivo como script principal
 if __name__ == "__main__":
     # Ejecuta la aplicación Flask con la configuración de las variables de entorno
