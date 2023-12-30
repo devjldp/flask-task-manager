@@ -144,6 +144,13 @@ def edit_task(task_id):
     return render_template("edit_task.html", task=task, categories=categories)
 
 
+@app.route("/delete_task/<task_id>")
+def delete_task(task_id):
+    mongo.db.tasks.delete_one({"_id": ObjectId(task_id)})
+    flash("Task Successfully Deleted")
+    return redirect(url_for("get_tasks"))
+
+
 # Si se ejecuta este archivo como script principal
 if __name__ == "__main__":
     # Ejecuta la aplicación Flask con la configuración de las variables de entorno
